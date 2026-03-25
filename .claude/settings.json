@@ -1,0 +1,55 @@
+{
+  "model": "claude-sonnet-4-5",
+  "context_window": "auto",
+
+  "permissions": {
+    "allow": [
+      "Bash(uv:*)",
+      "Bash(uvx:*)",
+      "Bash(docker:*)",
+      "Bash(docker-compose:*)",
+      "Bash(ruff:*)",
+      "Bash(mypy:*)",
+      "Bash(pytest:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(echo:*)",
+      "Bash(curl:*)",
+      "Read(**)",
+      "Write(backend/**)",
+      "Write(nginx/**)",
+      "Write(frontend/**)",
+      "Write(docker-compose.yml)",
+      "Write(.env.example)",
+      "Write(pyproject.toml)",
+      "Write(uv.lock)"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(curl * | bash)",
+      "Write(.env)",
+      "Write(**/*.pem)",
+      "Write(**/*.key)"
+    ]
+  },
+
+  "environment": {
+    "UV_PROJECT_ENVIRONMENT": ".venv",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUNBUFFERED": "1"
+  },
+
+  "hooks": {
+    "pre_tool_use": [".claude/hooks/pre-tool.md"],
+    "post_tool_use": [".claude/hooks/post-tool.md"],
+    "on_file_write": [".claude/hooks/on-write.md"]
+  },
+
+  "auto_compact": true,
+  "verbose": false
+}
