@@ -80,12 +80,18 @@ dev-dependencies = [
   "pytest-asyncio>=0.23",
   "pytest-mock>=3",
   "ruff>=0.5",
+  "black>=24",
   "mypy>=1.10",
   "types-python-jose",
 ]
 
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "ASYNC"]
+ignore = ["E501"]   # black controls line length
 
 [tool.mypy]
 strict = true
